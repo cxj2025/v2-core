@@ -1,7 +1,7 @@
 
 pragma solidity >=0.8.0;
 
-SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: Apache-2.0
 
 import './interfaces/IUniswapV2Pair.sol';
 import './UniswapV2ERC20.sol';
