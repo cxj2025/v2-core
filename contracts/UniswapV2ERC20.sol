@@ -24,7 +24,7 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
     constructor() public {
         uint chainId;
         assembly {
-            chainId := chainid
+            uint chainId = block.chainid();
         }
         DOMAIN_SEPARATOR = keccak256(
             abi.encode(
