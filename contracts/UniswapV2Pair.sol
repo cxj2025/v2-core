@@ -1,6 +1,7 @@
+
 pragma solidity >=0.8.0;
 
-// SPDX-License-Identifier: Apache-2.0
+SPDX-License-Identifier: Apache-2.0
 
 import './interfaces/IUniswapV2Pair.sol';
 import './UniswapV2ERC20.sol';
@@ -11,7 +12,7 @@ import './interfaces/IUniswapV2Factory.sol';
 import './interfaces/IUniswapV2Callee.sol';
 import './interfaces/LinkTokenInterface.sol';
 
-contract UniswapV2Pair is IUniswapV2Pair {
+contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
     using SafeMath  for uint;
     using UQ112x112 for uint224;
 
