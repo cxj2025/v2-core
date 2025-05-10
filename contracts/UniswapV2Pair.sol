@@ -7,6 +7,7 @@ import './libraries/UQ112x112.sol';
 import './interfaces/IERC20.sol';
 import './interfaces/IUniswapV2Factory.sol';
 import './interfaces/IUniswapV2Callee.sol';
+import './interfaces/LinkTokenInterface.sol';
 
 contract UniswapV2Pair is IUniswapV2Pair {
     using SafeMath  for uint;
