@@ -7,7 +7,7 @@ import './libraries/SafeMath.sol';
 
 contract UniswapV2ERC20 is IUniswapV2ERC20 {
     using SafeMath for uint;
-
+    
     string public constant name = 'Uniswap V2';
     string public constant symbol = 'UNI-V2';
     uint8 public constant decimals = 18;
@@ -23,24 +23,23 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
     event Approval(address indexed owner, address indexed spender, uint value);
     event Transfer(address indexed from, address indexed to, uint value);
 
-    constructor() public {
-        uint chainId;
-        assembly {
-             function _chainId() internal view returns (uint) {
-      return block.chainid();
-            }
-        }
-        DOMAIN_SEPARATOR = keccak256(
-            abi.encode(
-                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
-                keccak256(bytes(name)),
-                keccak256(bytes('1')),
-                chainId,
-                address(this)
-            )
-        );
-    }
+    // Move the function declaration outside of any other functions
+    uint chainId = block.chainid();
 
+    bytes32 public constant DOMAIN_SEPARATOR_ = keccak256(
+        abi.encode(
+            keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
+            keccak256(bytes(name)),
+            keccak256(bytes('1')),
+            chainId,
+            address(this)
+        )
+    );
+
+    constructor() public {
+        DOMAIN_SEPARATOR = DOMAIN_SEPARATOR_;
+    }
+    
     function _mint(address to, uint value) internal {
         totalSupply = totalSupply.add(value);
         balanceOf[to] = balanceOf[to].add(value);
