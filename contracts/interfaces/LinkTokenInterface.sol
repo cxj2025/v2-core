@@ -1,5 +1,6 @@
-// SPDX-License-Identifier: MIT
 pragma solidity >=0.5.0;
+
+// SPDX-License-Identifier: Apache-2.0
 
 interface LinkTokenInterface {
   function allowance(address owner, address spender) external view returns (uint256 remaining);
