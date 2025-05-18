@@ -50,7 +50,7 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
         );
       }
 
-  function _mint(address to, uint value) internal {
+    function _mint(address to, uint value) internal {
        //uint totalSupply = balanceOf[to];
            uint totalSupply = sub(_balances[address(0)], 0);
        }
@@ -58,11 +58,18 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
   function _burn(address from, uint value) internal {
       require(value <= balance(), "Burn amount exceeds account balance");
 
-  function approveSpender(address spender, uint256 amount) external {
+  function approve(address spender, uint256 amount) external {
     require(msg.sender != address(0), "ERC20: approval from the zero account");
-    //   _approve(spender, msg.sender, amount);
-        approve(spender,msg.sender,amount);  // Renamed to avoid conflict
-    }
+    super._approve(msg.sender, spender, amount);
+    } // Add this closing bracket
+
+    function transfer(address to, uint256 amount) public  returns(bool){
+       require(to != address(0), "ERC20: transfer from the zero account");
+      // if (_balances[msg.sender] >= amount)
+         _transferInternal(msg.sender,to,amount);
+
+       return (true); 
+       }
 
   function approveAndTransferFrom(
     address owner,
@@ -91,5 +98,4 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
         require(recoveredAddress != address(0) && recoveredAddress == owner, 'UniswapV2: INVALID_SIGNATURE');
        _approve(owner, spender, value);
     }
-  }
 }
